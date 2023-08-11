@@ -96,6 +96,7 @@ jobs:
       - image: amazon/aws-cli
     steps:
       - checkout
+      - aws-cli/setup
       - run:
           name: Ensure back-end infrastructure exists
           command: |
