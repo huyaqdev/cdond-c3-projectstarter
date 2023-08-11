@@ -91,7 +91,7 @@ jobs:
             npm install
             exit 0
     
-    deploy-infrastructure:
+  deploy-infrastructure:
     docker:
       - image: amazon/aws-cli
     steps:
