@@ -178,7 +178,9 @@ jobs:
   
   run-migrations:
     docker:
-      - image: cimg/node:18.17
+      - image: cimg/node:10.24.1
+    environment:
+      NODE_TLS_REJECT_UNAUTHORIZED: 0
     steps:
       - checkout
       - run:
@@ -198,6 +200,8 @@ jobs:
   deploy-frontend:
     docker:
       - image: cimg/node:18.17
+    environment:
+      NODE_OPTIONS: "--openssl-legacy-provider"
     steps:
       - checkout
       - run:
