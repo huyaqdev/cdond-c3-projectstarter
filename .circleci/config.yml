@@ -243,19 +243,21 @@ jobs:
       - add_ssh_keys:
           fingerprints: ['e4:a3:da:d2:78:fa:be:e9:cf:c0:65:9c:cb:8c:6b:b8']
       - attach_workspace:
-          at: .
+          at: ~/
       - run:
           name: Install dependencies
           command: |
             apk add -U nodejs ansible curl npm
             pip install awscli
       - run:
-          name: Deploy backend service
+          name: Build backend
           command: |
             cd backend
-            npm install
+            npm i
             npm run build
-            cd ..
+      - run:
+          name: Deploy backend service
+          command: |
             tar -C backend -czf .circleci/ansible/backend.tar.gz .
             cd .circleci/ansible
             echo "inventory.text"
