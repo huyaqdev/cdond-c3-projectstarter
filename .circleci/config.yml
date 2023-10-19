@@ -209,6 +209,8 @@ jobs:
       NODE_OPTIONS: "--openssl-legacy-provider"
     steps:
       - checkout
+      - attach_workspace:
+          at: ~/
       - run:
           name: Install dependencies
           command: |
