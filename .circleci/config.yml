@@ -20,6 +20,9 @@ commands:
             aws cloudformation delete-stack --stack-name udapeople-frontend-<<parameters.workflow_id>>
   revert-migrations:
     description: Revert the last migration if successfully run in the current workflow.
+    parameters:
+      workflow_id:
+        type: string
     steps:
       - run:
           name: Revert migrations
@@ -231,7 +234,7 @@ jobs:
       - destroy-environment:
           workflow_id: "${CIRCLE_WORKFLOW_ID:0:7}"
       - revert-migrations:
-          workflow-id: "${CIRCLE_WORKFLOW_ID:0:7}"
+          workflow_id: "${CIRCLE_WORKFLOW_ID:0:7}"
   deploy-backend:
     docker:
       - image: python:3.9-alpine
@@ -259,9 +262,9 @@ jobs:
             cat inventory.txt
             ansible-playbook -i inventory.txt deploy-backend.yml
       - revert-migrations:
-          workflow-id: "${CIRCLE_WORKFLOW_ID:0:7}"
+          workflow_id: "${CIRCLE_WORKFLOW_ID:0:7}"
       - destroy-environment:
-          workflow-id: "${CIRCLE_WORKFLOW_ID:0:7}"
+          workflow_id: "${CIRCLE_WORKFLOW_ID:0:7}"
           
 workflows:
   default:
