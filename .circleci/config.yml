@@ -314,6 +314,7 @@ jobs:
     docker:
       - image: python:3.9-alpine
     steps:
+      - checkout
       - run:
           name: Install dependencies
           command: |
