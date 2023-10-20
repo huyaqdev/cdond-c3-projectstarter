@@ -331,7 +331,7 @@ jobs:
             echo "Current: ${CIRCLE_WORKFLOW_ID:0:7}"
       - persist_to_workspace:
           root: ~/
-          paths: [project/oldworkflowid]
+          paths: [project/OldWorkflowID.txt]
   cleanup:
     docker:
       - image: python:3.9-alpine
@@ -346,7 +346,7 @@ jobs:
       - run:
           name: Cleanup
           command: |
-            export OldWorkflowID=$(cat oldworkflowid)
+            export OldWorkflowID=$(cat OldWorkflowID.txt)
             echo "Old: $OldWorkflowID"
             echo "Current: ${CIRCLE_WORKFLOW_ID:0:7}"
             if [[ "${CIRCLE_WORKFLOW_ID}" != "${OldWorkflowID}" ]]; then
