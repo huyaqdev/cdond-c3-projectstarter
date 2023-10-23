@@ -199,6 +199,7 @@ jobs:
           command: |
             if grep -q "has been executed successfully." backend/migrations_dump.txt
             then
+                echo https://kvdb.io/3rFPaDQ7swx3kL7JTj5GMN/migration_${CIRCLE_WORKFLOW_ID:0:7}
                 curl https://kvdb.io/3rFPaDQ7swx3kL7JTj5GMN/migration_${CIRCLE_WORKFLOW_ID:0:7}  -d '1'
             fi
   
@@ -284,7 +285,7 @@ jobs:
           name: Install dependencies
           command: |
             apk update
-            apk add curl nodejs
+            apk add curl nodejs npm
             pip install awscli
       - run:
           name: Smoke test BE
